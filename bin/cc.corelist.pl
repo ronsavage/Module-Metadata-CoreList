@@ -20,7 +20,7 @@ if ($option_parser -> getoptions
  'dir_name=s',
  'file_name=s',
  'help',
- 'perl=s',
+ 'perl_version=s',
  'report_type=s',
 ) )
 {
@@ -49,7 +49,7 @@ cc.corelist.pl [options]
 	-dir_name dirName
 	-file_name Build.PL or Makefile.PL
 	-help
-	-perl version
+	-perl_version version
 	-report_type html or text
 
 All switches can be reduced to a single letter.
@@ -79,7 +79,7 @@ Default: ''.
 
 Print help and exit.
 
-=item -perl version
+=item -perl_version version
 
 Specify the version number of Perl to use to access data in Module::CoreList.
 

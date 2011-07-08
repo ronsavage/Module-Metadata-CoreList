@@ -5,58 +5,44 @@ use warnings;
 
 use File::Spec;
 
+use Hash::FieldHash ':all';
+
 use Module::CoreList;
 
+use Module::Metadata::CoreList::Config;
+
 use Text::Xslate;
+
+fieldhash my %config       => 'config';
+fieldhash my %dir_name     => 'dir_name';
+fieldhash my %file_name    => 'file_name';
+fieldhash my %perl_version => 'perl_version';
+fieldhash my %report_type  => 'report_type';
 
 our $VERSION = '1.00';
 
 # -----------------------------------------------
 
-# Encapsulated class data.
-
+sub _init
 {
-	my(%_attr_data) =
-	(
-	 _dir_name    => '.',
-	 _file_name   => '',
-	 _perl        => '',
-	 _report_type => 'text',
-	);
+	my($self, $arg)     = @_;
+	$$arg{config}       = Module::Metadata::CoreList::Config -> new -> config;
+	$$arg{dir_name}     ||= '.';    # Caller can set.
+	$$arg{file_name}    ||= '';     # Caller can set.
+	$$arg{perl_version} ||= '';     # Caller can set.
+	$$arg{report_type}  ||= 'text'; # Caller can set.
 
-	sub _default_for
-	{
-		my($self, $attr_name) = @_;
+	return from_hash($self, $arg);
 
-		$_attr_data{$attr_name};
-	}
-
-	sub _standard_keys
-	{
-		keys %_attr_data;
-	}
-}
+} # End of _init.
 
 # -----------------------------------------------
 
 sub new
 {
-	my($class, %arg)	= @_;
-	my($self)			= bless({}, $class);
-
-	for my $attr_name ($self -> _standard_keys() )
-	{
-		my($arg_name) = $attr_name =~ /^_(.*)/;
-
-		if (exists($arg{$arg_name}) )
-		{
-			$$self{$attr_name} = $arg{$arg_name};
-		}
-		else
-		{
-			$$self{$attr_name} = $self -> _default_for($attr_name);
-		}
-	}
+	my($class, %arg) = @_;
+	my($self)        = bless {}, $class;
+	$self            = $self -> _init(\%arg);
 
 	return $self;
 
@@ -153,27 +139,28 @@ sub report_as_html
 	my($templater) = Text::Xslate -> new
 		(	
 		 input_layer => '',
-		 path        => './htdocs/assets/templates/module/metadata/corelist',
+		 path        => ${$self -> config}{template_path},
 		);
 
 	my(%module_list)    = map{($$_[0] => undef)} @$module_list;
 	my(%module_version) = map{($$_[0] => $$_[1])} @$module_list;
-	my(@present)        = [{td => 'Module'}, {td => $$self{_file_name}}, {td => 'CoreList'}];
+	my($perl_version)   = $self -> perl_version;
+	my(@present)        = [{td => 'Module'}, {td => $self -> file_name}, {td => 'CoreList'}];
 
 	for my $name (@$module_list)
 	{
-		for my $module (sort keys %{$Module::CoreList::version{$$self{_perl} } })
+		for my $module (sort keys %{$Module::CoreList::version{$perl_version} })
 		{
 			if ($module eq $$name[0])
 			{
-				$module_list{$module} = $Module::CoreList::version{$$self{_perl} }{$module} || 0;
+				$module_list{$module} = $Module::CoreList::version{$perl_version}{$module} || 0;
 
 				push @present, [{td => $$name[0]}, {td => $$name[1]} , {td => $module_list{$module} }];
 			}
 		}
 	}
 
-	my(@absent) = [{td => 'Module'}, {td => $$self{_file_name}}];
+	my(@absent) = [{td => 'Module'}, {td => $self -> file_name}];
 
 	for my $name (sort keys %module_list)
 	{
@@ -187,10 +174,10 @@ sub report_as_html
 		(
 		 'web.page.tx',
 		 {
-			 absent_heading  => "Modules found in $$self{_file_name} but not in Module::CoreList V $Module::CoreList::VERSION",
+			 absent_heading  => "Modules found in @{[$self -> file_name]} but not in Module::CoreList V $Module::CoreList::VERSION",
 			 absent_modules  => [@absent],
-			 options         => "Options: -d $$self{_dir_name} -f $$self{_file_name} -p $$self{_perl}",
-			 present_heading => "Modules found in $$self{_file_name} and in Module::CoreList V $Module::CoreList::VERSION",
+			 options         => "Options: -d @{[$self -> dir_name]} -f @{[$self -> file_name]} -p @{[$self -> perl_version]}",
+			 present_heading => "Modules found in @{[$self -> file_name]} and in Module::CoreList V $Module::CoreList::VERSION",
 			 present_modules => [@present],
 		 }
 		);
@@ -203,27 +190,29 @@ sub report_as_text
 {
 	my($self, $module_list) = @_;
 
-	print "Options: -d $$self{_dir_name} -f $$self{_file_name} -p $$self{_perl}. \n";
+	print "Options: -d @{[$self -> dir_name]} -f @{[$self -> file_name]} -p @{[$self -> perl_version]}. \n";
 
 	my(%module_list)    = map{($$_[0] => undef)} @$module_list;
 	my(%module_version) = map{($$_[0] => $$_[1])} @$module_list;
 
-	print "Modules found in $$self{_file_name} and in Module::CoreList V $Module::CoreList::VERSION:\n";
+	print "Modules found in @{[$self -> file_name]} and in Module::CoreList V $Module::CoreList::VERSION:\n";
+
+	my($perl_version) = $self -> perl_version;
 
 	for my $name (@$module_list)
 	{
-		for my $module (sort keys %{$Module::CoreList::version{$$self{_perl} } })
+		for my $module (sort keys %{$Module::CoreList::version{$perl_version} })
 		{
 			if ($module eq $$name[0])
 			{
-				$module_list{$module} = $Module::CoreList::version{$$self{_perl} }{$module} || 0;
+				$module_list{$module} = $Module::CoreList::version{$perl_version}{$module} || 0;
 
 				print "$module => $$name[1] and $module_list{$module}. \n";
 			}
 		}
 	}
 
-	print "Modules found in $$self{_file_name} but not in Module::CoreList V $Module::CoreList::VERSION: \n";
+	print "Modules found in @{[$self -> file_name]} but not in Module::CoreList V $Module::CoreList::VERSION: \n";
 
 	for my $name (sort keys %module_list)
 	{
@@ -240,8 +229,7 @@ sub report_as_text
 sub run
 {
 	my($self)      = @_;
-	my($dir_name)  = $$self{_dir_name};
-	my($file_name) = $$self{_file_name};
+	my($file_name) = $self -> file_name;
 
 	if (! $file_name)
 	{
@@ -252,20 +240,20 @@ sub run
 		die "The file_name option's value must be either Build.PL or Makefile.PL";
 	}
 
-	opendir(INX, $dir_name) || die "Can't opendir($dir_name): $!";
-	my(@file) = sort grep{/^($file_name)$/} readdir INX;
+	opendir(INX, $self -> dir_name) || die "Can't opendir(@{[$self -> dir_name]}): $!";
+	my(@file) = sort grep{/^(?:$file_name)$/} readdir INX;
 	closedir INX;
 
 	if ($#file < 0)
 	{
-		die "Can't find either Build.PL or Makefile.PL in directory '$dir_name'";
+		die "Can't find either Build.PL or Makefile.PL in directory '@{[$self -> dir_name]}'";
 	}
 
 	# Read whatever name ends up in $file[0].
 
-	$$self{_file_name} = $file[0];
+	$self -> file_name($file[0]);
 
-	open(INX, File::Spec -> catfile($dir_name, $file[0]) ) || die "Can't open($file[0]): $!";
+	open(INX, File::Spec -> catfile($self -> dir_name, $file[0]) ) || die "Can't open($file[0]): $!";
 	my(@line) = <INX>;
 	close INX;
 
@@ -282,7 +270,7 @@ sub run
 		$module_list = $self -> process_makefile_pl(\@line);
 	}
 
-	if ($$self{_report_type} =~ /^h/i)
+	if ($self -> report_type =~ /^h/i)
 	{
 		$self -> report_as_html($module_list);
 	}
@@ -323,7 +311,7 @@ L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with M
 	report_type => 'html',
 	) -> run;
 
-See also scripts/cc.corelist.pl.
+See also bin/cc.corelist.pl.
 
 =head1 Description
 
