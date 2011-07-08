@@ -21,7 +21,7 @@ our $VERSION = '1.00';
 	 _dir_name    => '.',
 	 _file_name   => '',
 	 _perl        => '',
-	 _report_type => 't',
+	 _report_type => 'text',
 	);
 
 	sub _default_for
@@ -316,7 +316,12 @@ L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with M
 	
 	# -----------------------------------------------
 	
-	Module::Metadata::CoreList -> new(dir_name => '/home/ron/Data-Session', perl => '5.012001') -> run;
+	Module::Metadata::CoreList -> new
+	(
+	dir_name    => '/home/ron/Data-Session',
+	perl        => '5.012001',
+	report_type => 'html',
+	) -> run;
 
 See also scripts/cc.corelist.pl.
 
@@ -324,12 +329,14 @@ See also scripts/cc.corelist.pl.
 
 L<Module::Metadata::CoreList> is a pure Perl module.
 
-It cross-checks a module's pre-requisites with the versions shipped with a specific version of Perl.
+This module cross-checks a module's pre-requisites with the versions shipped with a specific version of Perl.
+
+It's aim is to aid module authors in fine-tuning the versions of modules listed in Build.PL and Makefile.PL.
 
 It does this by reading Build.PL or Makefile.PL to get a list of pre-requisites, and looks
 up those module names in Module::CoreList.
 
-Output is in either text or HTML.
+The output report can be in either text or HTML.
 
 =head1 Distributions
 
@@ -348,7 +355,7 @@ This is the class's contructor.
 
 Usage: C<< Module::Metadata::CoreList -> new() >>.
 
-This method takes a hash of options. There are no mandatory options.
+This method takes a hash of options.
 
 Call C<new()> as C<< new(option_1 => value_1, option_2 => value_2, ...) >>.
 
@@ -360,20 +367,38 @@ Available options:
 
 Specify the directory to search in for Build.PL and/or Makefile.PL.
 
-The default is '.'.
+Default: '.'.
+
+This key is optional.
 
 =item o file_name => Build.PL or Makefile.PL
 
 Specify that you only want to process the given file.
 
-The default is '', which means the code searches for both Build.PL and Makefile.PL,
+Default: ''.
+
+This means the code searches for both Build.PL and Makefile.PL,
 and processes the first one after sorting the names alphabetically.
 
-=item perl => $version
+This key is optional.
+
+=item o perl => $version
 
 Specify the specific version of Perl to consider, when accessing L<Module::CoreList>.
 
 Perl V 5.10.1 must be written as 5.010001, and V 5.12.1 as 5.012001.
+
+Default: ''.
+
+This key is mandatory.
+
+=item o report_type => 'html' or 'text'
+
+Specify what type of report to produce. This report is written to STDOUT.
+
+Default: 'text'.
+
+This key is optional.
 
 =back
 
@@ -440,6 +465,7 @@ Home page: http://savage.net.au/index.html
 =head1 Copyright
 
 Australian copyright (c) 2011, Ron Savage.
+
 	All Programs of mine are 'OSI Certified Open Source Software';
 	you can redistribute them and/or modify them under the terms of
 	The Artistic License, a copy of which is available at:
