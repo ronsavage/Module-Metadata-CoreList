@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>Module::Metadata::CoreList</title>
+</head>
+<body>
+
+<h1 align="center">Module::Metadata::CoreList Report</h1>
+
+<p align="center">Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl.</p>
+
+<p align="center"><: $options :></p>
+
+<h2 align="center"><: $present_heading :></h2>
+
+: include "basic.table.tx" { row => $present_modules };
+
+<h2 align="center"><: $absent_heading :></h2>
+
+: include "basic.table.tx" { row => $absent_modules };
+
+</body>
+</html>
