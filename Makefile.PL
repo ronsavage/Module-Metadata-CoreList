@@ -12,21 +12,27 @@ WriteMakefile
  ) : (),
  clean =>
  {
-	 FILES => 'blib/* Makefile MANIFEST Module-Metadata-CorePrereqs-*'
+	 FILES => 'blib/* Makefile MANIFEST Module-Metadata-CoreList-*'
  },
  dist =>
  {
 	 COMPRESS => 'gzip',
 	 SUFFIX   => 'gz'
 },
- DISTNAME  => 'Module-Metadata-CorePrereqs',
- NAME      => 'Module::Metadata::CorePrereqs',
+ DISTNAME  => 'Module-Metadata-CoreList',
+ NAME      => 'Module::Metadata::CoreList',
  PL_FILES  => {},
  PREREQ_PM =>
- {
+ {   # Deliberately do not use version numbers.
+	 Config::Tiny     => 0,
+	 File::HomeDir    => 0,
+	 File::Spec       => 0,
+	 Hash::FieldHash  => 0,
 	 Module::CoreList => 0,
-	 'Test::More'     => 0,
-	 "Test::Pod"      => 0,
+	 Path::Class      => 0,
+	 Test::More       => 0,
+	 Test::Pod        => 0,
+	 Text::Xslate     => 0,
  },
- VERSION_FROM => 'lib/Module/Metadata/CorePrereqs.pm',
+ VERSION_FROM => 'lib/Module/Metadata/CoreList.pm',
 );

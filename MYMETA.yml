@@ -1,0 +1,34 @@
+---
+abstract: 'Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl'
+author:
+  - 'Ron Savage <ron@savage.net.au>'
+build_requires:
+  Test::More: 0
+  Test::Pod: 0
+configure_requires:
+  Module::Build: 0
+dynamic_config: 0
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930001'
+license: artistic
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Module-Metadata-CoreList
+provides:
+  Module::Metadata::CoreList:
+    file: lib/Module/Metadata/CoreList.pm
+    version: 1.00
+  Module::Metadata::CoreList::Config:
+    file: lib/Module/Metadata/CoreList/Config.pm
+    version: 1.00
+requires:
+  Config::Tiny: 0
+  File::HomeDir: 0
+  File::Spec: 0
+  Hash::FieldHash: 0
+  Module::CoreList: 0
+  Path::Class: 0
+  Text::Xslate: 0
+resources:
+  license: http://opensource.org/licenses/artistic-license.php
+version: 1.00
