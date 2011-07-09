@@ -21,7 +21,9 @@ WriteMakefile
 },
  DISTNAME  => 'Module-Metadata-CoreList',
  NAME      => 'Module::Metadata::CoreList',
- PL_FILES  => {},
+# Next line runs copy.config.pl when user runs 'make'.
+# Warning: '...' => 0 is OK but => '' or undef are ignored.
+ PL_FILES  => {'scripts/copy.config.pl' => 'Copying...'},
  PREREQ_PM =>
  {   # Deliberately do not use version numbers.
 	 Config::Tiny     => 0,

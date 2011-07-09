@@ -1,6 +1,16 @@
 use Module::Build;
 
-Module::Build -> new
+my $class = Module::Build->subclass(code => <<'EOF');
+
+sub ACTION_build
+{
+	my $self = shift;
+	$self->SUPER::ACTION_build(@_);
+	$self->run_perl_script('scripts/copy.config.pl');
+}
+EOF
+
+$class -> new
 (
  module_name    => 'Module::Metadata::CoreList',
  license        => 'artistic',

@@ -311,7 +311,8 @@ L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with M
 	report_type => 'html',
 	) -> run;
 
-See also bin/cc.corelist.pl.
+See also bin/cc.corelist.pl. This script will have been installed along with the module itself,
+so it should already be on your $PATH.
 
 =head1 Description
 
@@ -334,6 +335,67 @@ See http://savage.net.au/Perl-modules.html for details.
 
 See http://savage.net.au/Perl-modules/html/installing-a-module.html for
 help on unpacking and installing.
+
+=head1 Installation
+
+=head2 The Module Itself
+
+Install L<Module::Metadata::CoreList> as you would for any C<Perl> module:
+
+Run:
+
+	cpanm Module::Metadata::CoreList
+
+or run:
+
+	sudo cpan Module::Metadata::CoreList
+
+or unpack the distro, and then either:
+
+	perl Build.PL
+	./Build
+	./Build test
+	sudo ./Build install
+
+or:
+
+	perl Makefile.PL
+	make (or dmake or nmake)
+	make test
+	make install
+
+=head2 The Configuration File
+
+All that remains is to tell L<Module::Metadata::CoreList> your values for some options.
+
+For that, see config/.htmodule.metadata.corelist.conf.
+
+If you are using Build.PL, running Build (without parameters) will run scripts/copy.config.pl,
+as explained next.
+
+If you are using Makefile.PL, running make (without parameters) will also run scripts/copy.config.pl.
+
+Either way, before editing the config file, ensure you run scripts/copy.config.pl. It will copy
+the config file using L<File::HomeDir>, to a directory where the run-time code in
+L<Module::Metadata::CoreList> will look for it. Run it manually like this:
+
+	shell>cd Module-Metadata-CoreList-1.00
+	shell>perl scripts/copy.config.pl
+
+Under Debian, this directory will be $HOME/.perl/Module-Metadata-CoreList/. When you
+run copy.config.pl, it will report where it has copied the config file to.
+
+Check the docs for L<File::HomeDir> to see what your operating system returns for a
+call to my_dist_config().
+
+The point of this is that after the module is installed, the config file will be
+easily accessible and editable without needing permission to write to the directory
+structure in which modules are stored.
+
+That's why L<File::HomeDir> and L<Path::Class> are pre-requisites for this module.
+
+All modules which ship with their own config file are advised to use the same mechanism
+for storing such files.
 
 =head1 Constructor and initialization
 
@@ -448,7 +510,7 @@ L</report_as_html($module_list)> or L</report_as_text($module_list)>.
 
 L<Module::Metadata::CoreList> was written by Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2011.
 
-Home page: http://savage.net.au/index.html
+Home page: L<http://savage.net.au/index.html>.
 
 =head1 Copyright
 

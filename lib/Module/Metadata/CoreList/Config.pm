@@ -80,3 +80,58 @@ sub read
 # --------------------------------------------------
 
 1;
+
+=head1 NAME
+
+L<Module::Metadata::CoreList::Config> - Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl
+
+=head1 Synopsis
+
+See L<Module::Metadata::CoreList/Synopsis>.
+
+=head1 Description
+
+L<Module::Metadata::CoreList::Config> is a pure Perl module.
+
+It's a helper for L<Module::Metadata::CoreList>, to load the config file .htmodule.metadata.corelist.conf
+from a directory found by L<File::HomeDir>.
+
+The config file is shipped in the config/ directory of the distro, and is copied to its final destination
+during installation of L<Module::Metadata::CoreList>. You can run scripts/copy.config.pl to copy the file
+manually.
+
+=head1 Constructor and initialization
+
+new(...) returns an object of type L<Module::Metadata::CoreList::Config>.
+
+This is the class's contructor.
+
+Usage: C<< Module::Metadata::CoreList::Config -> new >>.
+
+This method takes no options.
+
+=head1 Methods
+
+=head2 config()
+
+Returns a hashref of config options. Used like this:
+
+	my($config)        = Module::Metadata::CoreList::Config -> new -> config;
+	my($template_path) = $$config{template_path};
+
+=head1 Author
+
+L<Module::Metadata::CoreList::Config> was written by Ron Savage I<E<lt>ron@savage.net.auE<gt>> in 2011.
+
+Home page: L<http://savage.net.au/index.html>.
+
+=head1 Copyright
+
+Australian copyright (c) 2011, Ron Savage.
+
+	All Programs of mine are 'OSI Certified Open Source Software';
+	you can redistribute them and/or modify them under the terms of
+	The Artistic License, a copy of which is available at:
+	http://www.opensource.org/licenses/index.html
+
+=cut
