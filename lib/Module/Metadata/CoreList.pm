@@ -327,6 +327,8 @@ up those module names in Module::CoreList.
 
 The output report can be in either text or HTML.
 
+Lastly, to keep this module light-weight, it uses L<Hash::FieldHash> mutators for managing object attributes.
+
 =head1 Distributions
 
 This module is available as a Unix-style distro (*.tgz).
