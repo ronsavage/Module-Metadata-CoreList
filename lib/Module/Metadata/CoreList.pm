@@ -306,9 +306,9 @@ L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with M
 	
 	Module::Metadata::CoreList -> new
 	(
-	dir_name    => '/home/ron/Data-Session',
-	perl        => '5.012001',
-	report_type => 'html',
+	dir_name     => '/home/ron/perl.modules/Data-Session',
+	perl_version => '5.012001',
+	report_type  => 'html',
 	) -> run;
 
 See also bin/cc.corelist.pl. This script will have been installed along with the module itself,
@@ -326,6 +326,10 @@ It does this by reading Build.PL or Makefile.PL to get a list of pre-requisites,
 up those module names in Module::CoreList.
 
 The output report can be in either text or HTML.
+
+Here is a sample HTML report: L<http://savage.net.au/Perl-modules/html/module.metadata.corelist.report.html>.
+
+This report is shipped in htdocs/.
 
 Lastly, to keep this module light-weight, it uses L<Hash::FieldHash> mutators for managing object attributes.
 
@@ -371,6 +375,12 @@ or:
 All that remains is to tell L<Module::Metadata::CoreList> your values for some options.
 
 For that, see config/.htmodule.metadata.corelist.conf.
+
+The default value for template_path is /dev/shm/html/assets/templates/module/metadata/corelist,
+where /dev/shm/ is Debian's RAM disk, since on my dev box I have the web server's doc root dir
+set to /dev/shm/html/.
+
+The template files are shipped in htdocs/assets/templates/module/metadata/corelist.
 
 If you are using Build.PL, running Build (without parameters) will run scripts/copy.config.pl,
 as explained next.
@@ -451,6 +461,10 @@ Specify what type of report to produce. This report is written to STDOUT.
 Default: 'text'.
 
 This key is optional.
+
+Here is a sample HTML report: L<http://savage.net.au/Perl-modules/html/module.metadata.corelist.report.html>.
+
+This report is shipped in htdocs/.
 
 =back
 
