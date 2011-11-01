@@ -5,6 +5,8 @@ Revision history for Perl extension Module::Metadata::CoreList.
 	  	specifically find_modules() and find_version.
 	  - Add bin/cc.perlmodule.pl to utilize the new features. Both this script and bin/cc.corelist.pl will be
 	  	installed along with the module itself.
+	  - Add t/test.corelist.t to test method run().
+	  - Add t/test.perlmodule.t to test method check_perl_module().
 	  - Update the docs to discuss bin/cc.perlmodule.pl.
 
 1.00  Thu Jul  7 13:34:00 2011
