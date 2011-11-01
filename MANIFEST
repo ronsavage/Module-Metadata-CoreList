@@ -18,3 +18,5 @@ README
 scripts/copy.config.pl
 t/00.pod.t
 t/01.load.t
+t/test.corelist.t
+t/test.perlmodule.t
