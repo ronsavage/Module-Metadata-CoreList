@@ -16,10 +16,40 @@ use Text::Xslate;
 fieldhash my %config       => 'config';
 fieldhash my %dir_name     => 'dir_name';
 fieldhash my %file_name    => 'file_name';
+fieldhash my %module_name  => 'module_name';
 fieldhash my %perl_version => 'perl_version';
 fieldhash my %report_type  => 'report_type';
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
+
+# -----------------------------------------------
+
+sub check_perl_module
+{
+	my($self)         = @_;
+	my($module_name)  = $self -> module_name;
+	my($perl_version) = $self -> perl_version;
+
+	if ($module_name)
+	{
+		my($prefix) = "Module names which match the regexp qr/$module_name/" . ($perl_version ? " in Perl V $perl_version: " : ': ');
+
+		print $prefix, join(', ', Module::CoreList::find_modules(qr/$module_name/, $perl_version ? $perl_version : () ) ), ". \n";
+	}
+	elsif ($perl_version)
+	{
+		print 'Module::CoreList ', (Module::CoreList::find_version($perl_version) ? 'recognizes' : 'does not recognize'), " V $perl_version of Perl. \n";
+	}
+	else
+	{
+		die 'Neither module_name nor perl_version specified';
+	}
+
+	# Return 0 for success and 1 for failure.
+
+	return 0;
+
+} # End of check_perl_module.
 
 # -----------------------------------------------
 
@@ -29,6 +59,7 @@ sub _init
 	$$arg{config}       = Module::Metadata::CoreList::Config -> new -> config;
 	$$arg{dir_name}     ||= '.';    # Caller can set.
 	$$arg{file_name}    ||= '';     # Caller can set.
+	$$arg{module_name}  ||= '';     # Caller can set.
 	$$arg{perl_version} ||= '';     # Caller can set.
 	$$arg{report_type}  ||= 'text'; # Caller can set.
 
@@ -295,6 +326,14 @@ L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with M
 
 =head1 Synopsis
 
+=head2 bin/cc.corelist.pl
+
+bin/cc.corelist.pl is a parameterized version of the following code.
+
+It will have been installed along with the module itself, so it should already be on your $PATH.
+
+Try running cc.corelist.pl -h.
+
 	#!/usr/bin/env perl
 	
 	use strict;
@@ -311,19 +350,76 @@ L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with M
 	report_type  => 'html',
 	) -> run;
 
-See also bin/cc.corelist.pl. This script will have been installed along with the module itself,
-so it should already be on your $PATH.
+=head2 bin/cc.perlmodule.pl
+
+bin/cc.perlmodule.pl is a parameterized version of the following code.
+
+It will have been installed along with the module itself, so it should already be on your $PATH.
+
+Try running cc.perlmodule.pl -h.
+
+=head3 Usage with just a Perl version specified:
+
+	#!/usr/bin/env perl
+	
+	use strict;
+	use warnings;
+	
+	use Module::Metadata::CoreList;
+	
+	# -----------------------------------------------
+	
+	Module::Metadata::CoreList -> new
+	(
+	perl_version => '5.012001',
+	) -> check_perl_module;
+
+Output:
+
+	Module::CoreList recognizes V 5.012001 of Perl.
+
+But try running it with perl_version => '5.012005' and the output is:
+
+	Module::CoreList does not recognize V 5.012005 of Perl.
+
+=head3 Usage with module_name specified, with or without perl_version specified:
+
+	#!/usr/bin/env perl
+	
+	use strict;
+	use warnings;
+	
+	use Module::Metadata::CoreList;
+	
+	# -----------------------------------------------
+	
+	Module::Metadata::CoreList -> new
+	(
+	module_name => 'warnings',
+	) -> check_perl_module;
+
+Output:
+
+	Module names which match the regexp qr/warnings/: encoding::warnings, warnings, warnings::register.
+
+Now add perl_version => '5.008001', and the output is:
+
+	Module names which match the regexp qr/warnings/ in Perl V 5.008001: warnings, warnings::register.
+
+This means encoding::warnings was not shipped in V 5.8.1 of Perl.
 
 =head1 Description
 
 L<Module::Metadata::CoreList> is a pure Perl module.
 
-This module cross-checks a module's pre-requisites with the versions shipped with a specific version of Perl.
+=head2 Usage via method run()
+
+This usage cross-checks a module's pre-requisites with the versions shipped with a specific version of Perl.
 
 It's aim is to aid module authors in fine-tuning the versions of modules listed in Build.PL and Makefile.PL.
 
 It does this by reading Build.PL or Makefile.PL to get a list of pre-requisites, and looks
-up those module names in Module::CoreList.
+up those module names in L<Module::CoreList>.
 
 The output report can be in either text or HTML.
 
@@ -331,7 +427,21 @@ Here is a sample HTML report: L<http://savage.net.au/Perl-modules/html/module.me
 
 This report is shipped in htdocs/.
 
-Lastly, to keep this module light-weight, it uses L<Hash::FieldHash> mutators for managing object attributes.
+See L</bin/cc.corelist.pl> as discussed in the synopsis.
+
+=head2 Usage via method check_perl_module()
+
+This usage tells you whether or not you've correctly specified a Perl version number, as recognized by L<Module::CoreList>,
+by calling the latter module's find_version() function.
+
+Further, you can detrmine whether or not a specific module is shipped with a specific version of Perl, by calling
+L<Module::CoreList>'s function find_modules().
+
+See L</bin/cc.perlmodule.pl> as discussed in the synopsis.
+
+=head2 Inheritance model
+
+To keep this module light-weight, it uses L<Hash::FieldHash> mutators for managing object attributes.
 
 =head1 Distributions
 
@@ -437,14 +547,24 @@ This key is optional.
 
 Specify that you only want to process the given file.
 
-Default: ''.
-
 This means the code searches for both Build.PL and Makefile.PL,
 and processes the first one after sorting the names alphabetically.
 
+Default: ''.
+
 This key is optional.
 
-=item o perl => $version
+=item o module_name => $module_name
+
+Specify the name of the module to use, in the call to check_perl_module().
+
+When method run() is called, this value is ignored.
+
+Default: ''.
+
+This key is optional, but if omitted then perl_version must be specified.
+
+=item o perl_version => $version
 
 Specify the specific version of Perl to consider, when accessing L<Module::CoreList>.
 
@@ -452,7 +572,8 @@ Perl V 5.10.1 must be written as 5.010001, and V 5.12.1 as 5.012001.
 
 Default: ''.
 
-This key is mandatory.
+This key is mandatory when calling run(), but when calling check_perl_module() it need only
+be specified if module_name is not specified.
 
 =item o report_type => 'html' or 'text'
 
@@ -469,6 +590,29 @@ This report is shipped in htdocs/.
 =back
 
 =head1 Methods
+
+=head2 check_perl_module()
+
+This module first checks the value of the module_name option.
+
+=over 4
+
+=item o If the user has specified a module name...
+
+Use both the specified module name, and the perl version (if any), to call L<Module::CoreList>'s
+find_modules() function.
+
+The output is a single line of text. The value of report_type is ignored.
+
+=item o If the user has not specified a module name...
+
+Use just the perl version to call L<Module::CoreList>'s find_version() function.
+
+The output is a single line of text. The values of module_name and report_type are ignored.
+
+=back
+
+Method check_perl_module() always returns 0 (for success).
 
 =head2 process_build_pl($line_ara)
 
@@ -521,6 +665,8 @@ Does all the work.
 
 Calls either L<process_build_pl($line_ara)> or L</process_makefile_pl($line_ara)>, then calls either
 L</report_as_html($module_list)> or L</report_as_text($module_list)>.
+
+Method run() always returns 0 (for success).
 
 =head1 Author
 
