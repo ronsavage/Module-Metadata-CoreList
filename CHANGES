@@ -1,5 +1,8 @@
 Revision history for Perl extension Module::Metadata::CoreList.
 
+1.02  Mon Feb 27 11:03:00 2012
+	  - Fix t/test.corelist.t to not hard-code the version # of Module::CoreList, but to get it from that module.
+
 1.01  Tue Nov  1 11:09:00 2011
 	  - Extend Module::Metadata::CoreList to provide direct access to some functions declared in Module::CoreList,
 	  	specifically find_modules() and find_version.
