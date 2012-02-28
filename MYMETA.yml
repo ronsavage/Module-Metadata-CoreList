@@ -17,7 +17,7 @@ name: Module-Metadata-CoreList
 provides:
   Module::Metadata::CoreList:
     file: lib/Module/Metadata/CoreList.pm
-    version: 1.02
+    version: 1.03
   Module::Metadata::CoreList::Config:
     file: lib/Module/Metadata/CoreList/Config.pm
     version: 1.02
@@ -32,4 +32,4 @@ requires:
   Text::Xslate: 0
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 1.02
+version: 1.03
