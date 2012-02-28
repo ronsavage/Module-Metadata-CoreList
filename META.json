@@ -27,6 +27,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Capture::Tiny" : 0,
             "Config::Tiny" : 0,
             "File::HomeDir" : 0,
             "File::Spec" : 0,
@@ -40,7 +41,7 @@
    "provides" : {
       "Module::Metadata::CoreList" : {
          "file" : "lib/Module/Metadata/CoreList.pm",
-         "version" : "1.02"
+         "version" : "1.03"
       },
       "Module::Metadata::CoreList::Config" : {
          "file" : "lib/Module/Metadata/CoreList/Config.pm",
@@ -53,5 +54,5 @@
          "http://opensource.org/licenses/artistic-license.php"
       ]
    },
-   "version" : "1.02"
+   "version" : "1.03"
 }

@@ -27,6 +27,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Capture::Tiny" : 0,
             "Config::Tiny" : 0,
             "File::HomeDir" : 0,
             "File::Spec" : 0,

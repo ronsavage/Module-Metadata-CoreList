@@ -26,7 +26,8 @@ $class -> new
  	 Module::Build => 0,
  },
  requires =>
- {
+ {   # Deliberately do not use version numbers.
+	 Capture::Tiny    => 0,
 	 Config::Tiny     => 0,
 	 File::HomeDir    => 0,
 	 File::Spec       => 0,

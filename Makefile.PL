@@ -26,6 +26,7 @@ WriteMakefile
  PL_FILES  => {'scripts/copy.config.pl' => 'Copying...'},
  PREREQ_PM =>
  {   # Deliberately do not use version numbers.
+	 Capture::Tiny    => 0,
 	 Config::Tiny     => 0,
 	 File::HomeDir    => 0,
 	 File::Spec       => 0,
