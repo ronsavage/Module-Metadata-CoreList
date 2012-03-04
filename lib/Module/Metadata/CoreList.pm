@@ -322,7 +322,7 @@ sub run
 
 =head1 NAME
 
-L<Module::Metadata::CoreList> - Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl
+Module::Metadata::CoreList - Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl
 
 =head1 Synopsis
 
