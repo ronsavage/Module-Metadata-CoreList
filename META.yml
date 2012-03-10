@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   Module::Build: 0
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.113640'
+generated_by: 'Module::Build version 0.4, CPAN::Meta::Converter version 2.120530'
 license: artistic
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,19 +17,19 @@ name: Module-Metadata-CoreList
 provides:
   Module::Metadata::CoreList:
     file: lib/Module/Metadata/CoreList.pm
-    version: 1.03
+    version: 1.04
   Module::Metadata::CoreList::Config:
     file: lib/Module/Metadata/CoreList/Config.pm
-    version: 1.02
+    version: 1.04
 requires:
   Capture::Tiny: 0
   Config::Tiny: 0
   File::HomeDir: 0
   File::Spec: 0
   Hash::FieldHash: 0
-  Module::CoreList: 0
+  Module::CoreList: 2.61
   Path::Class: 0
   Text::Xslate: 0
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 1.03
+version: 1.04

@@ -20,7 +20,7 @@ fieldhash my %module_name  => 'module_name';
 fieldhash my %perl_version => 'perl_version';
 fieldhash my %report_type  => 'report_type';
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 # -----------------------------------------------
 
@@ -168,7 +168,7 @@ sub report_as_html
 {
 	my($self, $module_list) = @_;
 	my($templater) = Text::Xslate -> new
-		(	
+		(
 		 input_layer => '',
 		 path        => ${$self -> config}{template_path},
 		);
@@ -335,14 +335,14 @@ It will have been installed along with the module itself, so it should already b
 Try running cc.corelist.pl -h.
 
 	#!/usr/bin/env perl
-	
+
 	use strict;
 	use warnings;
-	
+
 	use Module::Metadata::CoreList;
-	
+
 	# -----------------------------------------------
-	
+
 	Module::Metadata::CoreList -> new
 	(
 	dir_name     => '/home/ron/perl.modules/Data-Session',
@@ -361,14 +361,14 @@ Try running cc.perlmodule.pl -h.
 =head3 Usage with just a Perl version specified:
 
 	#!/usr/bin/env perl
-	
+
 	use strict;
 	use warnings;
-	
+
 	use Module::Metadata::CoreList;
-	
+
 	# -----------------------------------------------
-	
+
 	Module::Metadata::CoreList -> new
 	(
 	perl_version => '5.012001',
@@ -385,14 +385,14 @@ But try running it with perl_version => '5.012005' and the output is:
 =head3 Usage with module_name specified, with or without perl_version specified:
 
 	#!/usr/bin/env perl
-	
+
 	use strict;
 	use warnings;
-	
+
 	use Module::Metadata::CoreList;
-	
+
 	# -----------------------------------------------
-	
+
 	Module::Metadata::CoreList -> new
 	(
 	module_name => 'warnings',

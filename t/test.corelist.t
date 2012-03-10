@@ -11,7 +11,7 @@ my($app) = Module::Metadata::CoreList -> new(perl_version => 5.008001);
 
 my($stdout, $stderr, @result) = capture{$app -> run};
 
-my(@report) = map{s/^\s//; s/\s$//; $_} split(/\n/, $stdout);
+my(@report) = map{s/^\s//; s/\s$//; $_} grep{! /^Module::CoreList/} split(/\n/, $stdout);
 my($expect) = <<EOS;
 Options: -d . -f Build.PL -p 5.008001.
 Modules found in Build.PL and in Module::CoreList V $Module::CoreList::VERSION:
@@ -23,7 +23,6 @@ Config::Tiny => 0.
 File::HomeDir => 0.
 Hash::FieldHash => 0.
 Module::Build => 0.
-Module::CoreList => 0.
 Path::Class => 0.
 Test::Pod => 0.
 Text::Xslate => 0.

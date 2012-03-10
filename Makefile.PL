@@ -31,7 +31,7 @@ WriteMakefile
 	 File::HomeDir    => 0,
 	 File::Spec       => 0,
 	 Hash::FieldHash  => 0,
-	 Module::CoreList => 0,
+	 Module::CoreList => 2.61,
 	 Path::Class      => 0,
 	 Test::More       => 0,
 	 Test::Pod        => 0,

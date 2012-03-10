@@ -4,7 +4,7 @@
       "Ron Savage <ron@savage.net.au>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.113640",
+   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120530",
    "license" : [
       "artistic_1"
    ],
@@ -16,36 +16,36 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "Test::More" : 0,
-            "Test::Pod" : 0
+            "Test::More" : "0",
+            "Test::Pod" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : 0
+            "Module::Build" : "0"
          }
       },
       "runtime" : {
          "requires" : {
-            "Capture::Tiny" : 0,
-            "Config::Tiny" : 0,
-            "File::HomeDir" : 0,
-            "File::Spec" : 0,
-            "Hash::FieldHash" : 0,
-            "Module::CoreList" : 0,
-            "Path::Class" : 0,
-            "Text::Xslate" : 0
+            "Capture::Tiny" : "0",
+            "Config::Tiny" : "0",
+            "File::HomeDir" : "0",
+            "File::Spec" : "0",
+            "Hash::FieldHash" : "0",
+            "Module::CoreList" : "2.61",
+            "Path::Class" : "0",
+            "Text::Xslate" : "0"
          }
       }
    },
    "provides" : {
       "Module::Metadata::CoreList" : {
          "file" : "lib/Module/Metadata/CoreList.pm",
-         "version" : "1.03"
+         "version" : "1.04"
       },
       "Module::Metadata::CoreList::Config" : {
          "file" : "lib/Module/Metadata/CoreList/Config.pm",
-         "version" : "1.02"
+         "version" : "1.04"
       }
    },
    "release_status" : "stable",
@@ -54,5 +54,5 @@
          "http://opensource.org/licenses/artistic-license.php"
       ]
    },
-   "version" : "1.03"
+   "version" : "1.04"
 }
