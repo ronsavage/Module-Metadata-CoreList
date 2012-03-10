@@ -1,10 +1,10 @@
 {
-   "abstract" : "Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl",
+   "abstract" : "Scripts to cross-check Build.PL/Makefile.PL with Module::CoreList, etc",
    "author" : [
       "Ron Savage <ron@savage.net.au>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120530",
+   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120630",
    "license" : [
       "artistic_1"
    ],
