@@ -1,5 +1,5 @@
 {
-   "abstract" : "Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl",
+   "abstract" : "Scripts to cross-check Build.PL/Makefile.PL with Module::CoreList, etc",
    "author" : [
       "Ron Savage <ron@savage.net.au>"
    ],
