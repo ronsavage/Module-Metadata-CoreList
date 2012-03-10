@@ -83,7 +83,7 @@ sub read
 
 =head1 NAME
 
-L<Module::Metadata::CoreList::Config> - Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl
+L<Module::Metadata::CoreList::Config> - Cross-check Build.PL/Makefile.PL with Module::CoreList
 
 =head1 Synopsis
 

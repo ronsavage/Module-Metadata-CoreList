@@ -14,7 +14,7 @@ $class -> new
 (
  module_name    => 'Module::Metadata::CoreList',
  license        => 'artistic',
- dist_abstract  => 'Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl',
+ dist_abstract  => 'Scripts to cross-check Build.PL/Makefile.PL with Module::CoreList, etc',
  dist_author    => 'Ron Savage <ron@savage.net.au>',
  build_requires =>
  {
