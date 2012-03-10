@@ -24,6 +24,36 @@ our $VERSION = '1.04';
 
 # -----------------------------------------------
 
+sub check_perl_for_module
+{
+	my($self)         = @_;
+	my($module_name)  = $self -> module_name;
+	my($perl_version) = $self -> perl_version;
+
+	if ($module_name && $perl_version)
+	{
+		if ($Module::CoreList::version{$perl_version} && $Module::CoreList::version{$perl_version}{$module_name})
+		{
+			print $Module::CoreList::version{$perl_version}{$module_name}, "\n";
+		}
+		else
+		{
+			die "Unknown version of Perl ($perl_version), or unknown module ($module_name)\n";
+		}
+	}
+	else
+	{
+		die "Either module_name or perl_version not specified\n";
+	}
+
+	# Return 0 for success and 1 for failure.
+
+	return 0;
+
+} # End of check_perl_for_module.
+
+# -----------------------------------------------
+
 sub check_perl_module
 {
 	my($self)         = @_;
@@ -42,7 +72,7 @@ sub check_perl_module
 	}
 	else
 	{
-		die 'Neither module_name nor perl_version specified';
+		die "Neither module_name nor perl_version specified\n";
 	}
 
 	# Return 0 for success and 1 for failure.
@@ -268,23 +298,23 @@ sub run
 	}
 	elsif ($file_name !~ /^(?:Build.PL|Makefile.PL)$/i)
 	{
-		die "The file_name option's value must be either Build.PL or Makefile.PL";
+		die "The file_name option's value must be either Build.PL or Makefile.PL\n";
 	}
 
-	opendir(INX, $self -> dir_name) || die "Can't opendir(@{[$self -> dir_name]}): $!";
+	opendir(INX, $self -> dir_name) || die "Can't opendir(@{[$self -> dir_name]}): $!\n";
 	my(@file) = sort grep{/^(?:$file_name)$/} readdir INX;
 	closedir INX;
 
 	if ($#file < 0)
 	{
-		die "Can't find either Build.PL or Makefile.PL in directory '@{[$self -> dir_name]}'";
+		die "Can't find either Build.PL or Makefile.PL in directory '@{[$self -> dir_name]}'\n";
 	}
 
 	# Read whatever name ends up in $file[0].
 
 	$self -> file_name($file[0]);
 
-	open(INX, File::Spec -> catfile($self -> dir_name, $file[0]) ) || die "Can't open($file[0]): $!";
+	open(INX, File::Spec -> catfile($self -> dir_name, $file[0]) ) || die "Can't open($file[0]): $!\n";
 	my(@line) = <INX>;
 	close INX;
 
@@ -326,11 +356,12 @@ Module::Metadata::CoreList - Cross-check Build.PL/Makefile.PL pre-reqs with Modu
 
 =head1 Synopsis
 
+These scripts are shipped in the bin/ directory of the distro, and hence are installed along with the modules,
+and will then be on your $PATH.
+
 =head2 bin/cc.corelist.pl
 
 bin/cc.corelist.pl is a parameterized version of the following code.
-
-It will have been installed along with the module itself, so it should already be on your $PATH.
 
 Try running cc.corelist.pl -h.
 
@@ -353,8 +384,6 @@ Try running cc.corelist.pl -h.
 =head2 bin/cc.perlmodule.pl
 
 bin/cc.perlmodule.pl is a parameterized version of the following code.
-
-It will have been installed along with the module itself, so it should already be on your $PATH.
 
 Try running cc.perlmodule.pl -h.
 
@@ -408,9 +437,46 @@ Now add perl_version => '5.008001', and the output is:
 
 This means encoding::warnings was not shipped in V 5.8.1 of Perl.
 
+=head2 cc.whichperlmodule.pl
+
+Run this module as:
+
+	cc.whichperlmodule.pl -p 5.008001 -m Module::CoreList
+	cc.whichperlmodule.pl -p 5.014001 -m Module::CoreList
+	cc.whichperlmodule.pl -p 5.014002 -m strict
+
+and the outputs will be:
+
+	Unknown version of Perl (5.008001), or unknown module (Module::CoreList)
+	2.49_01
+	1.04
+
+meaning that if the module was shipped with that version of Perl, the version # of the module is reported.
+
+There is no -report_type option for this program. Output is just 1 line of text.
+This means there is no need to edit the config file to run cc.whichperlmodule.pl.
+
 =head1 Description
 
 L<Module::Metadata::CoreList> is a pure Perl module.
+
+=head2 Usage via method check_perl_for_module()
+
+This usage cross-checks a module's existence within the modules shipped with a specific version of Perl.
+
+It's aim is to aid module authors in fine-tuning the versions of modules listed in Build.PL and Makefile.PL.
+
+See L</bin/cc.whichperlmodule.pl> as discussed in the synopsis.
+
+=head2 Usage via method check_perl_module()
+
+This usage tells you whether or not you've correctly specified a Perl version number, as recognized by L<Module::CoreList>,
+by calling the latter module's find_version() function.
+
+Further, you can detrmine whether or not a specific module is shipped with a specific version of Perl, by calling
+L<Module::CoreList>'s function find_modules().
+
+See L</bin/cc.perlmodule.pl> as discussed in the synopsis.
 
 =head2 Usage via method run()
 
@@ -428,16 +494,6 @@ Here is a sample HTML report: L<http://savage.net.au/Perl-modules/html/module.me
 This report is shipped in htdocs/.
 
 See L</bin/cc.corelist.pl> as discussed in the synopsis.
-
-=head2 Usage via method check_perl_module()
-
-This usage tells you whether or not you've correctly specified a Perl version number, as recognized by L<Module::CoreList>,
-by calling the latter module's find_version() function.
-
-Further, you can detrmine whether or not a specific module is shipped with a specific version of Perl, by calling
-L<Module::CoreList>'s function find_modules().
-
-See L</bin/cc.perlmodule.pl> as discussed in the synopsis.
 
 =head2 Inheritance model
 
@@ -591,6 +647,14 @@ This report is shipped in htdocs/.
 
 =head1 Methods
 
+=head2 check_perl_for_module()
+
+As the name says, Perl itself is checked to see if a module ships with a given version of perl.
+
+See L</bin/cc.whichperlmodule.pl> as discussed in the synopsis.
+
+Method check_perl_for_module() always returns 0 (for success).
+
 =head2 check_perl_module()
 
 This module first checks the value of the module_name option.
@@ -611,6 +675,8 @@ Use just the perl version to call L<Module::CoreList>'s find_version() function.
 The output is a single line of text. The values of module_name and report_type are ignored.
 
 =back
+
+See L</bin/cc.perlmodule.pl> as discussed in the synopsis.
 
 Method check_perl_module() always returns 0 (for success).
 
@@ -665,6 +731,8 @@ Does all the work.
 
 Calls either L<process_build_pl($line_ara)> or L</process_makefile_pl($line_ara)>, then calls either
 L</report_as_html($module_list)> or L</report_as_text($module_list)>.
+
+See L</bin/cc.corelist.pl> as discussed in the synopsis.
 
 Method run() always returns 0 (for success).
 

@@ -24,7 +24,7 @@ if ($option_parser -> getoptions
 {
 	pod2usage(1) if ($option{'help'});
 
-	exit Module::Metadata::CoreList -> new(%option) -> check_perl_module;
+	exit Module::Metadata::CoreList -> new(%option) -> check_perl_for_module;
 }
 else
 {
@@ -37,11 +37,11 @@ __END__
 
 =head1 NAME
 
-cc.perlmodule.pl - Cross-check a module name or a version of Perl
+cc.whichperlmodule.pl - Search Module::CoreList for a module within a given version of Perl
 
 =head1 SYNOPSIS
 
-cc.perlmodule.pl [options]
+cc.corelist.pl [options]
 
 	Options:
 	-help
@@ -62,13 +62,13 @@ Print help and exit.
 
 =item -module_name NameOfModule
 
-Specify the name of the module whose Perl versions are to be found.
+Specify the name of the module to be searched for, for the given version of Perl.
 
 Default: ''.
 
 =item -perl_version VersionOfPerl
 
-Specify the version number of Perl to validate.
+Specify the version number of Perl to search.
 
 Perl V 5.10.1 must be written as 5.010001, and V 5.12.1 as 5.012001.
 
