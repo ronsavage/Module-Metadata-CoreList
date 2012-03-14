@@ -25,10 +25,10 @@ WriteMakefile
 # Warning: '...' => 0 is OK but => '' or undef are ignored.
  PL_FILES  => {'scripts/copy.config.pl' => 'Copying...'},
  PREREQ_PM =>
- {   # Deliberately do not use version numbers.
+ {   # Deliberately do not use version numbers in most cases.
 	 Capture::Tiny    => 0,
 	 Config::Tiny     => 0,
-	 File::HomeDir    => 0,
+	 File::HomeDir    => 0.99,
 	 File::Spec       => 0,
 	 Hash::FieldHash  => 0,
 	 Module::CoreList => 2.61,

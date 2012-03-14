@@ -17,14 +17,14 @@ name: Module-Metadata-CoreList
 provides:
   Module::Metadata::CoreList:
     file: lib/Module/Metadata/CoreList.pm
-    version: 1.04
+    version: 1.05
   Module::Metadata::CoreList::Config:
     file: lib/Module/Metadata/CoreList/Config.pm
-    version: 1.04
+    version: 1.05
 requires:
   Capture::Tiny: 0
   Config::Tiny: 0
-  File::HomeDir: 0
+  File::HomeDir: 0.99
   File::Spec: 0
   Hash::FieldHash: 0
   Module::CoreList: 2.61
@@ -32,4 +32,4 @@ requires:
   Text::Xslate: 0
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 1.04
+version: 1.05

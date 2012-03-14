@@ -26,10 +26,10 @@ $class -> new
  	 Module::Build => 0,
  },
  requires =>
- {   # Deliberately do not use version numbers.
+ {   # Deliberately do not use version numbers in most cases.
 	 Capture::Tiny    => 0,
 	 Config::Tiny     => 0,
-	 File::HomeDir    => 0,
+	 File::HomeDir    => 0.99,
 	 File::Spec       => 0,
 	 Hash::FieldHash  => 0,
 	 Module::CoreList => 2.61,

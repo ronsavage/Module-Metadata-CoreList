@@ -1,5 +1,9 @@
 Revision history for Perl extension Module::Metadata::CoreList.
 
+1.05  Thu Mar 15 10:17:00 2012
+	- Force Build.PL and Makefile.PL to install File::HomeDir >= V 0.99, so my_dist_congfig() is available.
+		Consequently, force t/test.corelist.t to ingore this module when cross-checking output.
+
 1.04  Sat mar 10 11:24:00 2012
 	- Force Build.PL and Makefile.PL to install Module::CoreList >= V 2.61.
 		Originally, all version #s were 0, for ease of checking the output.
