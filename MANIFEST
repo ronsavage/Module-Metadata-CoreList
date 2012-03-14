@@ -1,5 +1,6 @@
 bin/cc.corelist.pl
 bin/cc.perlmodule.pl
+bin/cc.whichperlmodule.pl
 Build.PL
 Changelog.ini
 CHANGES
