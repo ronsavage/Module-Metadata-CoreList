@@ -56,17 +56,17 @@ Exit value: 0.
 
 =over 4
 
-=item -help
+=item o -help
 
 Print help and exit.
 
-=item -module_name NameOfModule
+=item o -module_name NameOfModule
 
 Specify the name of the module whose Perl versions are to be found.
 
 Default: ''.
 
-=item -perl_version VersionOfPerl
+=item o -perl_version VersionOfPerl
 
 Specify the version number of Perl to validate.
 

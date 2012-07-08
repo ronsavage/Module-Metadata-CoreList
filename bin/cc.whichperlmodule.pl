@@ -41,7 +41,7 @@ cc.whichperlmodule.pl - Search Module::CoreList for a module within a given vers
 
 =head1 SYNOPSIS
 
-cc.corelist.pl [options]
+cc.whichperlmodule.pl [options]
 
 	Options:
 	-help
@@ -56,17 +56,17 @@ Exit value: 0.
 
 =over 4
 
-=item -help
+=item o -help
 
 Print help and exit.
 
-=item -module_name NameOfModule
+=item o -module_name NameOfModule
 
 Specify the name of the module to be searched for, for the given version of Perl.
 
 Default: ''.
 
-=item -perl_version VersionOfPerl
+=item o -perl_version VersionOfPerl
 
 Specify the version number of Perl to search.
 

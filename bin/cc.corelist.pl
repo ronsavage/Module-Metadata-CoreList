@@ -60,7 +60,7 @@ Exit value: 0.
 
 =over 4
 
-=item -dir_name dirName
+=item o -dir_name dirName
 
 Specify the name of the directory in which to look for Build.PL and/or Makefile.PL.
 
@@ -68,18 +68,18 @@ These 2 files are searched for in alphabetical order.
 
 Default: '.'.
 
-=item -file_name Build.PL or Makefile.PL
+=item o -file_name Build.PL or Makefile.PL
 
 Specify the name of the file to process, if you don't want the program to search as
 explained under -dir_name.
 
 Default: ''.
 
-=item -help
+=item o -help
 
 Print help and exit.
 
-=item -perl_version version
+=item o -perl_version version
 
 Specify the version number of Perl to use to access data in Module::CoreList.
 
@@ -87,7 +87,7 @@ Perl V 5.10.1 must be written as 5.010001, and V 5.12.1 as 5.012001.
 
 Default: ''.
 
-=item -report_type html or text
+=item o -report_type html or text
 
 Specify the output report type:
 
