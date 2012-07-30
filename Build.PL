@@ -26,14 +26,22 @@ $class -> new
  	 Module::Build => 0,
  },
  requires =>
- {   # Deliberately do not use version numbers in most cases.
-	 Capture::Tiny    => 0,
-	 Config::Tiny     => 0,
-	 File::HomeDir    => 0.99,
-	 File::Spec       => 0,
-	 Hash::FieldHash  => 0,
-	 Module::CoreList => 2.61,
-	 Path::Class      => 0,
-	 Text::Xslate     => 0,
+ {	# Deliberately do not use version numbers in most cases.
+	# This makes it easier to test the module on itself.
+	Capture::Tiny    => 0,
+	Config           => 0,
+	Config::Tiny     => 0,
+	Date::Simple     => 0,
+	File::Copy       => 2.21,
+	File::HomeDir    => 0.99,
+	File::Spec       => 0,
+	Getopt::Long     => 2.38,
+	Hash::FieldHash  => 0,
+	Module::CoreList => 2.61,
+	Path::Class      => 0,
+	Pod::Usage       => 1.51,
+	strict           => 1.04,
+	Text::Xslate     => 0,
+	warnings         => 1.12,
  },
 ) -> create_build_script();

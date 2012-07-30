@@ -4,7 +4,7 @@
       "Ron Savage <ron@savage.net.au>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "Module::Build version 0.4001, CPAN::Meta::Converter version 2.120630",
    "license" : [
       "artistic_1"
    ],
@@ -28,24 +28,31 @@
       "runtime" : {
          "requires" : {
             "Capture::Tiny" : "0",
+            "Config" : "0",
             "Config::Tiny" : "0",
+            "Date::Simple" : "0",
+            "File::Copy" : "2.21",
             "File::HomeDir" : "0.99",
             "File::Spec" : "0",
+            "Getopt::Long" : "2.38",
             "Hash::FieldHash" : "0",
             "Module::CoreList" : "2.61",
             "Path::Class" : "0",
-            "Text::Xslate" : "0"
+            "Pod::Usage" : "1.51",
+            "Text::Xslate" : "0",
+            "strict" : "1.04",
+            "warnings" : "1.12"
          }
       }
    },
    "provides" : {
       "Module::Metadata::CoreList" : {
          "file" : "lib/Module/Metadata/CoreList.pm",
-         "version" : "1.05"
+         "version" : "1.06"
       },
       "Module::Metadata::CoreList::Config" : {
          "file" : "lib/Module/Metadata/CoreList/Config.pm",
-         "version" : "1.05"
+         "version" : "1.06"
       }
    },
    "release_status" : "stable",
@@ -54,5 +61,5 @@
          "http://opensource.org/licenses/artistic-license.php"
       ]
    },
-   "version" : "1.05"
+   "version" : "1.06"
 }

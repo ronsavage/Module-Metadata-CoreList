@@ -1,7 +1,9 @@
 Revision history for Perl extension Module::Metadata::CoreList.
 
-1.06  Unreleased
+1.06  Mon Jul 30 13:11:00 2012
 	- Clean up docs in bin/cc.*.pl.
+	- Prettify template htdocs/assets/templates/module/metadata/corelist/web.page.tx.
+	- Rectify lists of pre-reqs in Build.PL and Makefile.PL.
 
 1.05  Thu Mar 15 10:17:00 2012
 	- Force Build.PL and Makefile.PL to install File::HomeDir >= V 0.99, so my_dist_congfig() is available.

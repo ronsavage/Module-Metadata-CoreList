@@ -3,6 +3,10 @@ package Module::Metadata::CoreList;
 use strict;
 use warnings;
 
+use Config;
+
+use Date::Simple;
+
 use File::Spec;
 
 use Hash::FieldHash ':all';
@@ -20,7 +24,27 @@ fieldhash my %module_name  => 'module_name';
 fieldhash my %perl_version => 'perl_version';
 fieldhash my %report_type  => 'report_type';
 
-our $VERSION = '1.05';
+our $VERSION = '1.06';
+
+# ------------------------------------------------
+
+sub _build_environment
+{
+	my($self) = @_;
+
+	my(@environment);
+
+	# mark_raw() is needed because of the HTML tag <a>.
+
+	push @environment,
+	{left => 'Author', right => mark_raw(qq|<a href="http://savage.net.au/">Ron Savage</a>|)},
+	{left => 'Date',   right => Date::Simple -> today},
+	{left => 'OS',     right => 'Debian V 6.0.4'},
+	{left => 'Perl',   right => $Config{version} };
+
+	return \@environment;
+}
+ # End of _build_environment.
 
 # -----------------------------------------------
 
@@ -231,6 +255,7 @@ sub report_as_html
 		}
 	}
 
+	my($config)      = $self -> config;
 	my(@module_list) =
 	(
 		'<a href="https://metacpan.org/release/Module-CoreList">Module::CoreList</a>',
@@ -245,10 +270,14 @@ sub report_as_html
 	{
 		absent_heading  => "Modules found in @{[$self -> file_name]} but not in Module::CoreList V $Module::CoreList::VERSION",
 		absent_modules  => [@absent],
+		default_css     => "$$config{css_url}/default.css",
+		environment     => $self -> _build_environment,
+		fancy_table_css => "$$config{css_url}/fancy.table.css",
 		module_list     => mark_raw(join(', ', @module_list) ),
 		options         => "-d @{[$self -> dir_name]} -f @{[$self -> file_name]} -p @{[$self -> perl_version]}",
 		present_heading => "Modules found in @{[$self -> file_name]} and in Module::CoreList V $Module::CoreList::VERSION",
 		present_modules => [@present],
+		version         => $VERSION,
 	}
 	);
 
