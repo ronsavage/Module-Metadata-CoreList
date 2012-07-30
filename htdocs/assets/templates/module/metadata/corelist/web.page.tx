@@ -6,9 +6,11 @@
 
 <h1 align="center">Module::Metadata::CoreList Report</h1>
 
+<h2 align="center">Modules: <: $module_list :></h2>
+
 <p align="center">Cross-check Build.PL/Makefile.PL pre-reqs with Module::CoreList for a specific version of Perl.</p>
 
-<p align="center"><: $options :></p>
+<p align="center">shell&gt; cc.corelist.pl <: $options :></p>
 
 <h2 align="center"><: $present_heading :></h2>
 
@@ -17,6 +19,20 @@
 <h2 align="center"><: $absent_heading :></h2>
 
 : include "basic.table.tx" { row => $absent_modules };
+
+<p>Note: cc.corelist.pl, cc.perlmodule.pl and cc.whichperlmodule.pl ship with Module::Metadata::CoreList.
+Each responds to -h.</p>
+
+Summary:
+<ol>
+<li>cc.corelist.pl - Cross-check pre-reqs in Build.PL/Makefile.PL with Module::CoreList
+<li>cc.perlmodule.pl - Cross-check a module name or a version of Perl
+<li>cc.whichperlmodule.pl - Search Module::CoreList for a module within a given version of Perl
+</ol>
+
+This report was produced by: perl -Ilib bin/cc.corelist.pl -d ../Data-Session -f Build.PL -p 5.010001 -r html &gt; module.metadata.corelist.report.html
+
+The output ships in the htdocs/ directory of the distro.
 
 </body>
 </html>

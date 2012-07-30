@@ -11,7 +11,7 @@ use Module::CoreList;
 
 use Module::Metadata::CoreList::Config;
 
-use Text::Xslate;
+use Text::Xslate 'mark_raw';
 
 fieldhash my %config       => 'config';
 fieldhash my %dir_name     => 'dir_name';
@@ -231,17 +231,26 @@ sub report_as_html
 		}
 	}
 
+	my(@module_list) =
+	(
+		'<a href="https://metacpan.org/release/Module-CoreList">Module::CoreList</a>',
+		'<a href="https://metacpan.org/release/Module-Metadata-CoreList">Module::Metadata::CoreList</a>',
+	);
+
+	push @module_list, '<a href="https://metacpan.org/release/Data-Session">Data::Session</a>' if ($ENV{AUTHOR_TESTING});
+
 	print $templater -> render
-		(
-		 'web.page.tx',
-		 {
-			 absent_heading  => "Modules found in @{[$self -> file_name]} but not in Module::CoreList V $Module::CoreList::VERSION",
-			 absent_modules  => [@absent],
-			 options         => "Options: -d @{[$self -> dir_name]} -f @{[$self -> file_name]} -p @{[$self -> perl_version]}",
-			 present_heading => "Modules found in @{[$self -> file_name]} and in Module::CoreList V $Module::CoreList::VERSION",
-			 present_modules => [@present],
-		 }
-		);
+	(
+	'web.page.tx',
+	{
+		absent_heading  => "Modules found in @{[$self -> file_name]} but not in Module::CoreList V $Module::CoreList::VERSION",
+		absent_modules  => [@absent],
+		module_list     => mark_raw(join(', ', @module_list) ),
+		options         => "-d @{[$self -> dir_name]} -f @{[$self -> file_name]} -p @{[$self -> perl_version]}",
+		present_heading => "Modules found in @{[$self -> file_name]} and in Module::CoreList V $Module::CoreList::VERSION",
+		present_modules => [@present],
+	}
+	);
 
 } # End of report_as_html.
 
