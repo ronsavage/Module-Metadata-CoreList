@@ -28,6 +28,7 @@ $class -> new
  requires =>
  {	# Deliberately do not use version numbers in most cases.
 	# This makes it easier to test the module on itself.
+	# See t/test.corelist.t for details.
 	Capture::Tiny    => 0,
 	Config           => 0,
 	Config::Tiny     => 0,
