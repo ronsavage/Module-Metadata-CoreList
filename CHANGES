@@ -2,6 +2,7 @@ Revision history for Perl extension Module::Metadata::CoreList.
 
 1.07  Mon Sep 17 11:30:00 2012
 	- Use exists() on elements of %{$Module::CoreList::version{$perl_version} }.
+		This includes now outputting 'undef' in sub check_perl_for_module(), if necessary.
 
 1.06  Mon Jul 30 13:11:00 2012
 	- Clean up docs in bin/cc.*.pl.
