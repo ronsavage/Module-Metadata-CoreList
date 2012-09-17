@@ -24,7 +24,7 @@ fieldhash my %module_name  => 'module_name';
 fieldhash my %perl_version => 'perl_version';
 fieldhash my %report_type  => 'report_type';
 
-our $VERSION = '1.06';
+our $VERSION = '1.07';
 
 # ------------------------------------------------
 
@@ -56,9 +56,9 @@ sub check_perl_for_module
 
 	if ($module_name && $perl_version)
 	{
-		if ($Module::CoreList::version{$perl_version} && $Module::CoreList::version{$perl_version}{$module_name})
+		if ($Module::CoreList::version{$perl_version} && exists $Module::CoreList::version{$perl_version}{$module_name})
 		{
-			print $Module::CoreList::version{$perl_version}{$module_name}, "\n";
+			print exists $Module::CoreList::version{$perl_version}{$module_name} ? $Module::CoreList::version{$perl_version}{$module_name} : 'undef', "\n";
 		}
 		else
 		{

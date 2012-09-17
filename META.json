@@ -4,7 +4,7 @@
       "Ron Savage <ron@savage.net.au>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4001, CPAN::Meta::Converter version 2.120630",
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120630",
    "license" : [
       "artistic_1"
    ],
@@ -48,11 +48,11 @@
    "provides" : {
       "Module::Metadata::CoreList" : {
          "file" : "lib/Module/Metadata/CoreList.pm",
-         "version" : "1.06"
+         "version" : "1.07"
       },
       "Module::Metadata::CoreList::Config" : {
          "file" : "lib/Module/Metadata/CoreList/Config.pm",
-         "version" : "1.06"
+         "version" : "1.07"
       }
    },
    "release_status" : "stable",
@@ -61,5 +61,5 @@
          "http://opensource.org/licenses/artistic-license.php"
       ]
    },
-   "version" : "1.06"
+   "version" : "1.07"
 }
