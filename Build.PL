@@ -13,7 +13,7 @@ EOF
 $class -> new
 (
  module_name    => 'Module::Metadata::CoreList',
- license        => 'perl_5',
+ license        => 'artistic_2',
  dist_abstract  => 'Scripts to cross-check Build.PL/Makefile.PL with Module::CoreList, etc',
  dist_author    => 'Ron Savage <ron@savage.net.au>',
  build_requires =>

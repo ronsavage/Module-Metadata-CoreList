@@ -21,7 +21,7 @@ WriteMakefile
 },
  DISTNAME  => 'Module-Metadata-CoreList',
  NAME      => 'Module::Metadata::CoreList',
-	LICENSE   => 'perl_5',
+	LICENSE   => 'artistic_2',
 # Next line runs copy.config.pl when user runs 'make'.
 # Warning: '...' => 0 is OK but => '' or undef are ignored.
  PL_FILES  => {'scripts/copy.config.pl' => 'Copying...'},
