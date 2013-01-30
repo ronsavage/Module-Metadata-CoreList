@@ -43,7 +43,7 @@ WriteMakefile
 	Pod::Usage       => 0,
 	strict           => 0,
 	Test::Simple     => 0,
-	Test::Pod        => 0,
+	Test::Pod        => 1.45,
 	Text::Xslate     => 0,
 	warnings         => 0,
  },

@@ -19,7 +19,7 @@ $class -> new
  build_requires =>
  {
 	 "Test::Simple" => 0,
-	 'Test::Pod'  => 0,
+	 'Test::Pod'  => 1.45,
  },
  configure_requires =>
  {
