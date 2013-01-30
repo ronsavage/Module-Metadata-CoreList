@@ -42,7 +42,7 @@ WriteMakefile
 	Path::Class      => 0,
 	Pod::Usage       => 0,
 	strict           => 0,
-	Test::More       => 0,
+	Test::Simple     => 0,
 	Test::Pod        => 0,
 	Text::Xslate     => 0,
 	warnings         => 0,

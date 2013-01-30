@@ -18,7 +18,7 @@ $class -> new
  dist_author    => 'Ron Savage <ron@savage.net.au>',
  build_requires =>
  {
-	 "Test::More" => 0,
+	 "Test::Simple" => 0,
 	 'Test::Pod'  => 0,
  },
  configure_requires =>
