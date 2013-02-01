@@ -19,7 +19,7 @@ $class -> new
  build_requires =>
  {
 	 "Test::More" => 0,
-	 'Test::Pod'  => 1.45,
+#	 'Test::Pod'  => 1.45, # Make it optional. See t/pod.t
  },
  configure_requires =>
  {
@@ -27,8 +27,6 @@ $class -> new
  },
  requires =>
  {	# Deliberately do not use version numbers in most cases.
-	# This makes it easier to test the module on itself.
-	# See t/test.corelist.t for details.
 	Capture::Tiny    => 0,
 	Config           => 0,
 	Config::Tiny     => 0,
