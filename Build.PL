@@ -21,29 +21,29 @@ $class -> new
 	dist_author    => 'Ron Savage <ron@savage.net.au>',
 	build_requires =>
 	{
-		'Test::More' => 0,
-#		'Test::Pod'  => 1.45, # Make it optional. See t/pod.t
+		'Test::More' => 1.001014,
+		'Test::Pod' => 1.48,
 	},
 	configure_requires =>
 	{
-		 'Module::Build' => 0,
+		'Module::Build' => 0.4211,
 	},
 	requires =>
 	{	# Deliberately do not use version numbers in most cases.
-		'Capture::Tiny'    => 0,
-		'Config'           => 0,
-		'Config::Tiny'     => 0,
-		'Date::Simple'     => 0,
-		'File::Copy'       => 0,
-		'File::HomeDir'    => 0.99,
-		'File::Spec'       => 0,
-		'Getopt::Long'     => 0,
-		'Hash::FieldHash'  => 0,
+		'Capture::Tiny' => 0,
+		'Config' => 0,
+		'Config::Tiny' => 0,
+		'Date::Simple' => 0,
+		'File::Copy' => 0,
+		'File::HomeDir' => 0.99,
+		'File::Spec' => 0,
+		'Getopt::Long' => 0,
+		'Hash::FieldHash' => 0,
 		'Module::CoreList' => 2.61,
-		'Path::Class'      => 0,
-		'Pod::Usage'       => 0,
-		'strict'           => 0,
-		'Text::Xslate'     => 0,
-		'warnings'         => 0,
+		'Path::Class' => 0,
+		'Pod::Usage' => 0,
+		'strict' => 0,
+		'Text::Xslate' => 0,
+		'warnings' => 0,
 	},
 ) -> create_build_script();
