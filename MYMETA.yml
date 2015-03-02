@@ -3,11 +3,12 @@ abstract: 'Scripts to cross-check Build.PL/Makefile.PL with Module::CoreList, et
 author:
   - 'Ron Savage <ron@savage.net.au>'
 build_requires:
-  ExtUtils::MakeMaker: '0'
+  Test::More: '1.001014'
+  Test::Pod: '1.48'
 configure_requires:
-  ExtUtils::MakeMaker: '0'
+  Module::Build: '0.4211'
 dynamic_config: 0
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.120630, CPAN::Meta::Converter version 2.143240'
+generated_by: 'Module::Build version 0.4211, CPAN::Meta::Converter version 2.143240'
 license: artistic
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -33,8 +34,6 @@ requires:
   Module::CoreList: '2.61'
   Path::Class: '0'
   Pod::Usage: '0'
-  Test::More: '1.001014'
-  Test::Pod: '1.48'
   Text::Xslate: '0'
   strict: '0'
   warnings: '0'
