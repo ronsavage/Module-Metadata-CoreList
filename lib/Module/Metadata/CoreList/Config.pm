@@ -8,7 +8,7 @@ use Moo;
 
 use Path::Class;
 
-use Types::Standard qw/Any Str/;
+use Types::Standard qw/Any HashRef Str/;
 
 has config =>
 (
@@ -30,7 +30,7 @@ has section =>
 (
 	default  => sub{return ''},
 	is       => 'rw',
-	isa      => Str,
+	isa      => HashRef,
 	required => 0,
 );
 
