@@ -9,20 +9,62 @@ use Date::Simple;
 
 use File::Spec;
 
-use Hash::FieldHash ':all';
-
 use Module::CoreList;
-
 use Module::Metadata::CoreList::Config;
+
+use Moo;
 
 use Text::Xslate 'mark_raw';
 
-fieldhash my %config       => 'config';
-fieldhash my %dir_name     => 'dir_name';
-fieldhash my %file_name    => 'file_name';
-fieldhash my %module_name  => 'module_name';
-fieldhash my %perl_version => 'perl_version';
-fieldhash my %report_type  => 'report_type';
+use Types::Standard qw/Object Str/;
+
+has config =>
+(
+	default  => sub{return Module::Metadata::CoreList::Config -> new -> config},
+	is       => 'rw',
+	isa      => Object,
+	required => 0,
+);
+
+has dir_name =>
+(
+	default  => sub{return '.'},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has file_name =>
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has module_name =>
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has perl_version =>
+(
+	default  => sub{return ''},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
+
+has report_type =>
+(
+	default  => sub{return 'text'},
+	is       => 'rw',
+	isa      => Str,
+	required => 0,
+);
 
 our $VERSION = '1.08';
 
@@ -104,34 +146,6 @@ sub check_perl_module
 	return 0;
 
 } # End of check_perl_module.
-
-# -----------------------------------------------
-
-sub _init
-{
-	my($self, $arg)     = @_;
-	$$arg{config}       = Module::Metadata::CoreList::Config -> new -> config;
-	$$arg{dir_name}     ||= '.';    # Caller can set.
-	$$arg{file_name}    ||= '';     # Caller can set.
-	$$arg{module_name}  ||= '';     # Caller can set.
-	$$arg{perl_version} ||= '';     # Caller can set.
-	$$arg{report_type}  ||= 'text'; # Caller can set.
-
-	return from_hash($self, $arg);
-
-} # End of _init.
-
-# -----------------------------------------------
-
-sub new
-{
-	my($class, %arg) = @_;
-	my($self)        = bless {}, $class;
-	$self            = $self -> _init(\%arg);
-
-	return $self;
-
-}	# End of new.
 
 # -----------------------------------------------
 
