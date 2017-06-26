@@ -549,7 +549,7 @@ See L</bin/cc.corelist.pl> as discussed in the synopsis.
 
 =head2 Inheritance model
 
-To keep this module light-weight, it uses L<Hash::FieldHash> mutators for managing object attributes.
+To keep this module light-weight, it uses L<Moo> managing object attributes.
 
 =head1 Distributions
 

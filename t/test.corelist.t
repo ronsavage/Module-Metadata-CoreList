@@ -27,11 +27,11 @@ Modules found in Build.PL but not in Module::CoreList V $Module::CoreList::VERSI
 Capture::Tiny => 0.
 Config::Tiny => 0.
 Date::Simple => 0.
-Hash::FieldHash => 0.
-Module::Build => 0.4211.
+Moo => 0.
 Path::Class => 0.
 Test::Pod => 1.48.
 Text::Xslate => 0.
+Types::Standard => 0.
 EOS
 my(@expect) = split(/\n/, $expect);
 
