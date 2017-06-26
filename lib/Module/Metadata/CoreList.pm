@@ -24,7 +24,7 @@ fieldhash my %module_name  => 'module_name';
 fieldhash my %perl_version => 'perl_version';
 fieldhash my %report_type  => 'report_type';
 
-our $VERSION = '1.07';
+our $VERSION = '1.08';
 
 # ------------------------------------------------
 
