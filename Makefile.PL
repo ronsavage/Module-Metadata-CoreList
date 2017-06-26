@@ -8,7 +8,7 @@ use ExtUtils::MakeMaker;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
 
-WriteMakefile
+my(%params) =
 (
 	($] ge '5.005') ?
 	(
@@ -26,7 +26,6 @@ WriteMakefile
 	},
 	DISTNAME  => 'Module-Metadata-CoreList',
 	NAME      => 'Module::Metadata::CoreList',
-	LICENSE   => 'artistic_2',
 # Next line runs copy.config.pl when user runs 'make'.
 # Warning: '...' => 0 is OK but => '' or undef are ignored.
 	PL_FILES  => {'scripts/copy.config.pl' => 'Copying...'},
@@ -47,10 +46,41 @@ WriteMakefile
 		'Path::Class' => 0,
 		'Pod::Usage' => 0,
 		'strict' => 0,
-		'Test::More' => 0,
-		'Test::Pod' => 0,
 		'Text::Xslate' => 0,
 		'warnings' => 0,
 	},
+	TEST_REQUIRES =>
+	{
+		'Test::More' => 0,
+		'Test::Pod' => 0,
+	},
 	VERSION_FROM => 'lib/Module/Metadata/CoreList.pm',
 );
+
+if ( ($ExtUtils::MakeMaker::VERSION =~ /^\d\.\d\d$/) && ($ExtUtils::MakeMaker::VERSION > 6.30) )
+{
+	$params{LICENSE} = 'perl';
+}
+
+if ($ExtUtils::MakeMaker::VERSION ge '6.46')
+{
+	$params{META_MERGE} =
+	{
+		'meta-spec' =>
+		{
+			'version' => 2,
+		},
+		resources   =>
+		{
+			'bugtracker' => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Module-Metadata-CoreList',
+			repository =>
+			{
+				'type' => 'git',
+				'url' => 'https://github.com/ronsavage/Module-Metadata-CoreList.git',
+				'web' => 'https://github.com/ronsavage/Module-Metadata-CoreList',
+			},
+		},
+	};
+}
+
+WriteMakefile(%params);
