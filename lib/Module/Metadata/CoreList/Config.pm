@@ -8,7 +8,7 @@ use Moo;
 
 use Path::Class;
 
-use Types::Standard qw/Object Str/;
+use Types::Standard qw/Any Str/;
 
 has config =>
 (
