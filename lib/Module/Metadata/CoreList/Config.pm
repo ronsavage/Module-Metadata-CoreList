@@ -49,7 +49,7 @@ sub BUILD
 
 	$self -> read;
 
-} # End of init.
+} # End of BUILD.
 
 # -----------------------------------------------
 

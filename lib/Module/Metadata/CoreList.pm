@@ -16,13 +16,13 @@ use Moo;
 
 use Text::Xslate 'mark_raw';
 
-use Types::Standard qw/Object Str/;
+use Types::Standard qw/HashRef Str/;
 
 has config =>
 (
 	default  => sub{return Module::Metadata::CoreList::Config -> new -> config},
 	is       => 'rw',
-	isa      => Object,
+	isa      => HashRef,
 	required => 0,
 );
 

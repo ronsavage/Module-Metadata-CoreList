@@ -52,7 +52,7 @@ my(%params) =
 	},
 	TEST_REQUIRES =>
 	{
-		'Test::More' => 0,
+		'Test::More' => 1.001002,
 		'Test::Pod' => 0,
 	},
 	VERSION_FROM => 'lib/Module/Metadata/CoreList.pm',
